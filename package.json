@@ -1,0 +1,15 @@
+{
+  "name": "prokwell",
+  "version": "1.0.0",
+  "description": "proxy para controladores rockwell",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "poximan",
+  "license": "ISC",
+  "dependencies": {
+    "ethernet-ip": "^1.2.4",
+    "simple-modbus": "^1.1.2"
+  }
+}
