@@ -10,22 +10,24 @@ let LecD_V1ERTU = new Tag("LecD.V1ERTU")
 PLC.subscribe(lectura_nivel);
 PLC.subscribe(LecD_V1ERTU);
 
-// Connect to PLC at IP, SLOT
-PLC.connect("192.1.2.100", 0).then(() => {
+exports.conectar = host => {
+  // Connect to PLC at IP, SLOT
+  PLC.connect(host, 0).then(() => {
 
-  const { name } = PLC.properties;
+    const { name } = PLC.properties;
 
-  // Log Connected to Console
-  console.log(`\n\nConnected to PLC ${name}...\n`);
+    // Log Connected to Console
+    console.log(`\n\nConectado a PLC ${name}...\n`);
 
-  PLC.readTag(lectura_nivel);
-  PLC.readTag(LecD_V1ERTU);
+    PLC.readTag(lectura_nivel);
+    PLC.readTag(LecD_V1ERTU);
 
-  // Begin Scanning Subscription Group
-  PLC.scan().catch((err) => {
-    console.error(err);
+    // Begin Scanning Subscription Group
+    PLC.scan().catch((err) => {
+      console.error(err);
+    })
   })
-})
+}
 
 let previos = []
 // Initialize Event Handlers
@@ -50,6 +52,6 @@ PLC.forEach(tag => {
   });
 
   tag.on("Initialized", tag => {
-    console.log("Initialized", tag.value);
+    console.log("Primeros valores", tag.value);
   });
 })

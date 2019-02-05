@@ -2,8 +2,10 @@ const ModbusTcp = require('simple-modbus').ModbusTcp
 const ModbusCommandException = require('simple-modbus').ModbusCommandException
 
 const server = new ModbusTcp.Server();
-server.listen(502);
 
+exports.puerto = puerto => {
+  server.listen(puerto);
+}
 
 server.onReadCoilStatus.on(command => {
   console.log(`Read Coil Status - Address: ${command.coilStartAddress} Number: ${command.numberOfCoils}`)
