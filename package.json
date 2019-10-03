@@ -10,6 +10,8 @@
   "license": "ISC",
   "dependencies": {
     "ethernet-ip": "^1.2.4",
-    "simple-modbus": "^1.1.2"
+    "simple-modbus": "^1.1.2",
+    "modbus-serial": "^7.6.0",
+    "mongodb": "^3.3.2"
   }
 }
