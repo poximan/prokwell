@@ -59,11 +59,6 @@ conectar = async(cb) => {
 }
 
 //
-// mongodb
-// 	usr: poxi_man@yahoo.com
-// 	contr: hugo13hugo
-//
-// conex bd
-// 	usr: mongousr
-// 	contr: mongopass
+// usr: poxi_man@yahoo.com
+// contr: hugo13hugo
 //
