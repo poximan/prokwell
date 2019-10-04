@@ -6,12 +6,13 @@ const persistencia = require("./persistencia")
 
 let anterior
 
-exports.comparar = (estado) => {
+exports.comparar = async(estado, id) => {
 
-  console.log((estado)? "conectado" : "desconectado")
-
-  if (anterior != estado)
-    persistencia.pedirTurno(estado)
+  if (anterior != estado){
+    console.log((estado)? `exemys id${id} conectado` : `exemys id${id} desconectado`)
+    console.log(new Date(Date.now()));
+    await persistencia.pedirTurno(estado)
+  }
   anterior = estado
 }
 

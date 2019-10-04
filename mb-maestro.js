@@ -31,9 +31,16 @@ exemys_mw.setID(22);
 // ------------------------------------
 
 const estadosConexMW = () => {
+
+  const GRD_ID = 13
+  const REG_ESTADO = 16
+  const OFFSET = 1
+
+  let reg = (GRD_ID - 1) * 16 + REG_ESTADO - OFFSET
+
   // FC=4
-  exemys_mw.readInputRegisters(207, 1, (err, data) => {
-    if (!err) comparador.comparar(data.data[0])
+  exemys_mw.readInputRegisters(reg, 1, (err, data) => {
+    if (!err) comparador.comparar(data.data[0], GRD_ID)
   });
 }
 
@@ -101,4 +108,4 @@ const estadosV33Cda05 = () => {
 // setInterval(estadosV33Cda02, 3000);
 // setInterval(estadosV33Cda04, 3000);
 // setInterval(estadosV33Cda05, 3000);
-setInterval(estadosConexMW, 100);
+setInterval(estadosConexMW, 500);

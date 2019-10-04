@@ -1,46 +1,62 @@
 const MongoClient = require("mongodb").MongoClient
+const EventEmitter = require('events');
+
+// ------------------------------------
+// turnero para sacar las persistencias
+// remotas en mongo
+// ------------------------------------
 
 var turnos = []
 
+// ------------------------------------
+// emisor de boludos
+// ------------------------------------
+
+const emisor = new EventEmitter();
+
+// ------------------------------------
+// api
+// ------------------------------------
+
 exports.pedirTurno = (estado) => {
-  turnos.push(estado)
-  persistir()
+  estampaTiempo((fecha) => {
+    turnos.push({ estado:estado, fecha:fecha })
+  })
+  emisor.emit('persistir')
 }
 
-persistir = async () => {
+estampaTiempo = (cb) => {
+  let tiempo = new Date(Date.now())
+  cb(new Date(tiempo - (180 * 60 * 1000)))
+}
 
-  let estado = turnos.pop()
+// ------------------------------------
+// atendedor de boludos
+// ------------------------------------
 
-  if(estado){
-    await actualizarAnterior((conexion) => {
-      conexion.close()
-    })
-    guardarNuevo(estado, (conexion) => {
-      conexion.close()
+emisor.on('persistir', async() => {
+  let evento = turnos.pop()
+  if(evento){
+    actualizarAnterior((conexion) => {
+      let coleccion_obj = conexion.db("bd").collection("coleccion")
+      coleccion_obj.insertOne( { ultimo: true, estado:evento.estado, fecha:evento.fecha },
+        () => {
+          conexion.close()
+          console.log("nuevo -> guardado")
+        }
+      )
     })
   }
-}
+})
 
+// esta tarea manifesto problemas de sincronizacion
 actualizarAnterior = (cb) => {
-
-  conectar(async(conexion) => {
+  conectar( async(conexion) => {
     let coleccion_obj = conexion.db("bd").collection("coleccion")
     await coleccion_obj.updateOne(
-      { ultimo: true },
-      { $set: { ultimo: false } }
+      { ultimo: true }, { $set: { ultimo: false } },
+      () => { cb(conexion); console.log("viejo -> editado"); }
     )
-    cb(conexion)
-  })
-}
-
-guardarNuevo = (estado, cb) => {
-
-  conectar(async(conexion) => {
-    let coleccion_obj = conexion.db("bd").collection("coleccion")
-    await coleccion_obj.insertOne(
-      { ultimo: true, fecha: new Date(Date.now()), estado: estado }
-    )
-    cb(conexion)
   })
 }
 
@@ -55,7 +71,7 @@ conectar = async(cb) => {
       uri,{ useNewUrlParser: true, useUnifiedTopology: true }
     )
     cb(client)
-  } catch(e) { console.error(e) }
+  } catch(e) { console.log("err conexion"); console.error(e) }
 }
 
 //
