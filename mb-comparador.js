@@ -1,4 +1,5 @@
 const persistencia = require("./persistencia")
+const tiempo = require("./tiempo")
 
 // ------------------------------------
 //
@@ -6,12 +7,16 @@ const persistencia = require("./persistencia")
 
 let anterior
 
-exports.comparar = async(estado, id) => {
+exports.comparar = (estado, id) => {
 
   if (anterior != estado){
-    console.log((estado)? `exemys id${id} conectado` : `exemys id${id} desconectado`)
-    console.log(new Date(Date.now()));
-    await persistencia.pedirTurno(estado)
+
+    console.log((estado)? `\nexemys id${id} conectado` : `exemys id${id} desconectado`)
+
+    tiempo.estampaTiempo((fecha) => {
+      console.log("hora: " + fecha)
+      persistencia.pedirTurno(estado, fecha)
+    });
   }
   anterior = estado
 }

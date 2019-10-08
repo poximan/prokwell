@@ -18,16 +18,9 @@ const emisor = new EventEmitter();
 // api
 // ------------------------------------
 
-exports.pedirTurno = (estado) => {
-  estampaTiempo((fecha) => {
-    turnos.push({ estado:estado, fecha:fecha })
-  })
+exports.pedirTurno = (estado, fecha) => {
+  turnos.push({ estado:estado, fecha:fecha.toTimeString() })
   emisor.emit('persistir')
-}
-
-estampaTiempo = (cb) => {
-  let tiempo = new Date(Date.now())
-  cb(new Date(tiempo - (180 * 60 * 1000)))
 }
 
 // ------------------------------------
