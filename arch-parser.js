@@ -17,6 +17,7 @@ exports.procesar = (entrada, fecha, cb) => {
   // .......................
   // guardar nuevo documento
   // .......................
+
   let salida = ""
 
   ind_preg.forEach((element, indice) => {

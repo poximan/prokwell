@@ -20,6 +20,7 @@ exports.procesar = (entrada, fecha, cb) => {
   // .......................
   // guardar nuevo documento
   // .......................
+
   let salida = ""
   let ind_no_rep = 0  // evita tomar la misma falla como ocurrencias diferentes
   let cont_falla = 0

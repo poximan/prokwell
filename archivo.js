@@ -19,9 +19,9 @@ guardar = (cadena, sufijo, cb) => {
   let path = PATH_ORIG
 
   path =
-      path.slice(0, PATH_ORIG.length - 4) +
-      sufijo +
-      path.slice(PATH_ORIG.length - 4)
+    path.slice(0, PATH_ORIG.length - 4) +
+    sufijo +
+    path.slice(PATH_ORIG.length - 4)
 
   fs_destino.writeFile(path, cadena, (err) => {
     if (err) console.log(err)
@@ -33,7 +33,7 @@ leer = (cb) => {
     if (err) console.log(err)
 
     const entrada = datos.toString().replace(/\r+\n+/g, '')
-    console.log("fin lectura archivo");
+    console.log("fin lectura archivo");    
     cb(entrada)
   })
 }
@@ -56,6 +56,7 @@ tamArchivo = (cb) => {
 // .......................
 // fechas inicio-fin log
 // .......................
+
 fechasLog = (entrada, cb) => {
 
   const ind_inicio = entrada.indexOf("Log Start : ");

@@ -53,9 +53,10 @@ actualizarAnterior = (cb) => {
   })
 }
 
-/*
-......... persistencia
-*/
+// .......................
+// persistencia
+// .......................
+
 const uri = 'mongodb+srv://mongousr:mongopass@cluster0-0ooek.azure.mongodb.net/test?retryWrites=true&w=majority';
 
 conectar = async(cb) => {
