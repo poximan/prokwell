@@ -1,8 +1,9 @@
+const tiempo = require("./tiempo")
+
 const EXP_PREG = /(\[[0-9A-F]+\]){8}/gm;
 
-exports.procesar = (entrada, fecha, cb) => {
+exports.procesar = (entrada, cb) => {
   const preguntas = entrada.match(EXP_PREG)
-
   let ind_preg = [0] // arranca en indice 0 para no perder encabezado de PCB-Log
 
   preguntas.forEach((element, indice) => {
@@ -12,7 +13,8 @@ exports.procesar = (entrada, fecha, cb) => {
 
     ind_preg.push(entrada.indexOf(element, ind_inicio))
   })
-  console.log(`se encontraron ${preguntas.length} preguntas en ${ind_preg.length - 1} indices`);
+
+  console.log(`se encontraron ${preguntas.length} preguntas en ${ind_preg.length - 1} indices\n`);
 
   // .......................
   // guardar nuevo documento
@@ -21,6 +23,7 @@ exports.procesar = (entrada, fecha, cb) => {
   let salida = ""
 
   ind_preg.forEach((element, indice) => {
+    salida += `tiempo ${tiempo.estimarTiempo(element)}\n`
     const pregunta = entrada.slice(element, element + 32) + "\n"
     salida += pregunta
     salida += entrada.slice(element + 32, ind_preg[indice + 1]) + "\n\n"

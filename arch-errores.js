@@ -1,10 +1,11 @@
+const tiempo = require("./tiempo")
+
 const EXP_PREG = /(\[[0-9A-F]+\]){8}/gm;
 const EXP_PREG_SIMP = /(\[[0-9A-F]+\]){8}/
 const TAM_PREG = 32
 
-exports.procesar = (entrada, fecha, cb) => {
+exports.procesar = (entrada, cb) => {
   const preguntas = entrada.match(EXP_PREG)
-
   let ind_preg = []
 
   preguntas.forEach((element, indice) => {
@@ -14,8 +15,6 @@ exports.procesar = (entrada, fecha, cb) => {
 
     ind_preg.push(entrada.indexOf(element, ind_inicio))
   })
-
-  console.log(`se encontraron ${preguntas.length} preguntas en ${ind_preg.length - 1} indices`);
 
   // .......................
   // guardar nuevo documento
@@ -34,7 +33,7 @@ exports.procesar = (entrada, fecha, cb) => {
         vecinos++
       }
       if(vecinos > 1){
-
+        salida += `tiempo ${tiempo.estimarTiempo(element)} - `
         salida += `falla ${cont_falla++}: inicia en ${element}, repite ${vecinos} veces \n`
         const pregunta = entrada.slice(element, element + vecinos * TAM_PREG) + "\n\n"
         salida += pregunta
