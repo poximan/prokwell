@@ -1,3 +1,4 @@
+const ModbusRTU = require("modbus-serial");
 const comparador = require("./mb-comparador")
 
 // ------------------------------------
@@ -16,7 +17,6 @@ const DIR_V33_CDA05_TP1 = 561
 // conexion
 // ------------------------------------
 
-const ModbusRTU = require("modbus-serial");
 const etsr = new ModbusRTU();
 const exemys_mw = new ModbusRTU();
 

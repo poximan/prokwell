@@ -2,18 +2,18 @@ const fs_origen = require('fs')
 const fs_origen_online = require('fs')
 const fs_destino = require('fs')
 
-const tiempo = require("./tiempo")
+const tiempo = require("../tiempo")
 
 const arch_parser = require("./arch-parser")
 const arch_errores = require("./arch-errores")
 
 const PATHS_ORIG = [
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191002 1.txt",
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191002 2.txt",
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191003.txt",
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191007 1.txt",
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191007 2.txt",
-  "D://documentos//hugo//git//prokwell//test//PCB-Log 191008.txt"
+  ".//datos//PCB-Log 191002 1.txt",
+  ".//datos//PCB-Log 191002 2.txt",
+  ".//datos//PCB-Log 191003.txt",
+  ".//datos//PCB-Log 191007 1.txt",
+  ".//datos//PCB-Log 191007 2.txt",
+  ".//datos//PCB-Log 191008.txt"
 ]
 const PATH_ONLINE = "C://Users//hdonato//AppData//Roaming//Prosoft Technology//PCB//PCB-Log.txt"
 

@@ -25,7 +25,7 @@ exports.estimarTiempo = (x) => {
 exports.fechasLog = (entrada) => {
 
   fecha = {}
-  
+
   const ind_ini = entrada.lastIndexOf(msg_ini)
   const ind_fin = entrada.lastIndexOf(msg_fin)
 
@@ -67,7 +67,6 @@ exports.fechasLog = (entrada) => {
 // .......................
 
 exports.estampaTiempo = (cb) => {
-  let tiempo = new Date(Date.now())
   //cb(new Date(tiempo - (180 * 60 * 1000)))
-  cb(tiempo)
+  cb(new Date(Date.now()))
 }

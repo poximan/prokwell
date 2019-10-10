@@ -1,4 +1,4 @@
-const tiempo = require("./tiempo")
+const tiempo = require("../tiempo")
 
 const EXP_PREG = /(\[[0-9A-F]+\]){8}/gm;
 

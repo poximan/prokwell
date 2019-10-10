@@ -1,5 +1,5 @@
 const persistencia = require("./persistencia")
-const tiempo = require("./tiempo")
+const tiempo = require("../tiempo")
 
 // ------------------------------------
 //
