@@ -13,7 +13,9 @@ const PATHS_ORIG = [
   ".//datos//PCB-Log 191003.txt",
   ".//datos//PCB-Log 191007 1.txt",
   ".//datos//PCB-Log 191007 2.txt",
-  ".//datos//PCB-Log 191008.txt"
+  ".//datos//PCB-Log 191008.txt",
+  ".//datos//PCB-Log 191010 1.txt",
+  ".//datos//PCB-Log 191010 2.txt"
 ]
 const PATH_ONLINE = "C://Users//hdonato//AppData//Roaming//Prosoft Technology//PCB//PCB-Log.txt"
 

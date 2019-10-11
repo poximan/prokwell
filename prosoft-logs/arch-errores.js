@@ -5,15 +5,16 @@ const EXP_PREG_SIMP = /(\[[0-9A-F]+\]){8}/
 const TAM_PREG = 32
 
 exports.procesar = (entrada, cb) => {
+
   const preguntas = entrada.match(EXP_PREG)
   let ind_preg = []
+  let ind_inicio = 0
 
   preguntas.forEach((element, indice) => {
 
-    let ind_inicio = 0
-    if(ind_preg.length > 1) ind_inicio = ind_preg[indice-1]
-
-    ind_preg.push(entrada.indexOf(element, ind_inicio))
+    ind_inicio = entrada.indexOf(element, ind_inicio)
+    ind_preg.push(ind_inicio)
+    ind_inicio += 32
   })
 
   // .......................
@@ -34,7 +35,7 @@ exports.procesar = (entrada, cb) => {
       }
       if(vecinos > 1){
         salida += `tiempo ${tiempo.estimarTiempo(element)} - `
-        salida += `falla ${cont_falla++}: inicia en ${element}, repite ${vecinos} veces \n`
+        salida += `falla ${cont_falla++}: inicia en ${element}, repite ${vecinos - 1} veces \n`
         const pregunta = entrada.slice(element, element + vecinos * TAM_PREG) + "\n\n"
         salida += pregunta
         ind_no_rep = element + vecinos * TAM_PREG

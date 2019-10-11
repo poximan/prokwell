@@ -26,7 +26,7 @@ exports.fechasLog = (entrada) => {
 
   fecha = {}
 
-  const ind_ini = entrada.lastIndexOf(msg_ini)
+  const ind_ini = entrada.indexOf(msg_ini)
   const ind_fin = entrada.lastIndexOf(msg_fin)
 
   const fecha_ini_tmp = entrada
@@ -60,6 +60,8 @@ exports.fechasLog = (entrada) => {
     fin: { pos:ind_fin, fecha:fecha_fin },
     m: (fecha_fin - fecha_ini) / (ind_fin - ind_ini)
   }
+  console.log("t(ini) caputurado: " + fecha_ini);
+  console.log("t(fin) caputurado: " + fecha_fin);
 }
 
 // .......................
